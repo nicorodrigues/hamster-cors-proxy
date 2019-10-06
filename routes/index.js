@@ -16,7 +16,7 @@ module.exports = (app, express) => {
     
     
     router.post('/bypass', async (req, res) => {
-        log(req.body.url || 'No hay url')
+        log(req.body.url || 'No url')
         res.send(await Axios({
             method: req.body.method || 'GET',
             url: req.body.url,
