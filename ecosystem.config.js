@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-        name: "Cors Proxy",
+        name: "Hamster Cors Proxy",
         script: "./server.js",
         env: {
             NODE_ENV: "production",

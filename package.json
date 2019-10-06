@@ -1,5 +1,5 @@
 {
-  "name": "cors-proxy",
+  "name": "hamster-cors-proxy",
   "version": "0.0.1",
   "description": "CORS Proxy",
   "main": "server.js",
