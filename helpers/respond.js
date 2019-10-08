@@ -39,7 +39,7 @@ const respond = async (res, {data = null, message = 'Undefined error', code = 20
             delete response.data;
             response.code = 500;
             response.error = message;
-            res.status(500).send(response);            
+            res.status(response.code).send(response);            
         }
     } else {
         data.data.pipe(res)
