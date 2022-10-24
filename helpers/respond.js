@@ -7,9 +7,8 @@ Respond creates and send the following formatted response:
 }
 */
 
-const log = require('./log')
-const fs = require('fs');
-
+const log = require("./log");
+const fs = require("fs");
 
 /*
 data: Sets the data to be returned
@@ -18,33 +17,31 @@ code: sets the status code
 direct: if true, it won't create the response object and instead send what was received in 'data' directly
 logging: if false, it won't log to console
 */
-const respond = async (res, {data = null, message = 'Undefined error', code = 200, direct = false, logging = true}) => {
-    let response = { "status": code };
-    
+const respond = async (res, { data = null, message = "Undefined error", code = 200, direct = false, logging = true }) => {
+    let response = { status: code };
+
     if (logging) {
         log(`Responded: ${JSON.stringify(response)}`);
     }
-    
-    if (!direct) {
-        
+
+    if (direct) {
+        data.data.pipe(res);
+    } else {
         if (code < 400) {
             response.data = data;
         } else {
             response.error = message;
         }
-        
+
         try {
             res.status(code).send(response);
         } catch (error) {
             delete response.data;
             response.code = 500;
             response.error = message;
-            res.status(response.code).send(response);            
+            res.status(response.code).send(response);
         }
-    } else {
-        data.data.pipe(res)
     }
-    
-} 
+};
 
 module.exports = respond;
